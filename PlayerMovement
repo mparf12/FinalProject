@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    // Declares Rigid body variable, declares and assigns the speed variable
+    // Declares Rigid body variable, Declares the Animator ,declares and assigns the speed variable
     Rigidbody2D rb;
     public float speed = 50;
- 
+    public Animator animator;
     void Start()
     {
         // Assigns the RigidBody variable to the objects Rigidbody
@@ -20,22 +20,44 @@ public class Movement : MonoBehaviour
         // Detects input from the D key
         if (Input.GetKey(KeyCode.D))
         {
+            animator.SetBool("Walking", true);
+           
+            //Flips the player sprite if they are walking right
+            gameObject.transform.localScale = new Vector3(1, 1, 1);
             // Applies velocity to the object by taking into account the spped and y velocity
             rb.velocity = new Vector2(speed, rb.velocity.y);
         }
         // Detects input from the A key
         else if (Input.GetKey(KeyCode.A))
         {
+            //Sets a boolean that states that the player is walking(Used for walking animation)
+            animator.SetBool("Walking", true);
+         
+            //Flips the player sprite if they are walking left
+            gameObject.transform.localScale = new Vector3(-1, 1, 1);
             // Applies velocity to the object by taking into account the spped and y velocity
             rb.velocity = new Vector2(-speed, rb.velocity.y);
         }
         else
-        { 
+        {
+            //Sets a boolean that states that the player is not walking(Used for idle animation)
+            animator.SetBool("Walking", false);
             //When no key is deceted on any frame update, no velocity will be applied(the player will stand still)
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
     }
+          //Manages item pickup
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+        //Checks to see if the object that is being collided with has a specfic tag
+        if (collision.gameObject.tag == "Item")
+        {
+            //delets the object if it has that tag
+            Destroy(collision.gameObject);
+        }
+    }
+    
 
 
 }
