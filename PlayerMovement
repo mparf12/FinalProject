@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Movement : MonoBehaviour
+{
+    // Declares Rigid body variable, declares and assigns the speed variable
+    Rigidbody2D rb;
+    public float speed = 50;
+ 
+    void Start()
+    {
+        // Assigns the RigidBody variable to the objects Rigidbody
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    
+    void Update()
+    { 
+        // Detects input from the D key
+        if (Input.GetKey(KeyCode.D))
+        {
+            // Applies velocity to the object by taking into account the spped and y velocity
+            rb.velocity = new Vector2(speed, rb.velocity.y);
+        }
+        // Detects input from the A key
+        else if (Input.GetKey(KeyCode.A))
+        {
+            // Applies velocity to the object by taking into account the spped and y velocity
+            rb.velocity = new Vector2(-speed, rb.velocity.y);
+        }
+        else
+        { 
+            //When no key is deceted on any frame update, no velocity will be applied(the player will stand still)
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+
+    }
+
+
+}
