@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     Rigidbody2D rb;
     public float speed = 50;
     public Animator animator;
+    public float score = 0;
     void Start()
     {
         // Assigns the RigidBody variable to the objects Rigidbody
@@ -55,6 +56,8 @@ public class Movement : MonoBehaviour
         {
             //delets the object if it has that tag
             Destroy(collision.gameObject);
+            //Increases the score 1
+            score++;
         }
     }
     
