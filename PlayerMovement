@@ -49,7 +49,7 @@ public class Movement : MonoBehaviour
 
     }
           //Manages item pickup
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
         //Checks to see if the object that is being collided with has a specfic tag
         if (collision.gameObject.tag == "Item")
@@ -58,6 +58,17 @@ public class Movement : MonoBehaviour
             Destroy(collision.gameObject);
             //Increases the score 1
             score++;
+        }
+        //Checks to see if the object is breakable
+        if (collision.gameObject.tag == "Breakable")
+        {
+            //Checks to see if the player Pressed E
+            if (Input.GetKey(KeyCode.E))
+            {
+                //delets the object if it has that tag
+                Destroy(collision.gameObject);
+            }
+
         }
     }
     
