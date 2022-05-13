@@ -1,0 +1,27 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Threat: MonoBehaviour
+{
+    private float speed = 10.0f;
+    public Vector2 target;
+    private Vector2 position;
+    
+
+    void Start()
+    {
+        
+        position = gameObject.transform.position;
+
+        
+    }
+
+    void Update()
+    {
+        float step = speed * Time.deltaTime;
+
+        // move sprite towards the target location
+        transform.position = Vector2.MoveTowards(transform.position, target, step);
+    }
+}
